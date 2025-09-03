@@ -16,11 +16,6 @@ function HomePage() {
     <div className="homepage-container homepage-custom-background">
       <Sidebar personnages={personnages} />
       <div className="main-content">
-        <h1>Personnages</h1>
-        <main className="personnage-grid">
-          {/* L'affichage des personnages a été retiré de cette page. */}
-          {/* Ils sont maintenant accessibles via le menu de la sidebar. */}
-        </main>
       </div>
     </div>
   );
