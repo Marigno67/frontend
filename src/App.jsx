@@ -1,11 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './HomePage';
+import AllPersonnagesPage from './AllPersonnagesPage';
 import PersonnageDetailsPage from './PersonnageDetailsPage';
 import ModesDeJeuPage from './ModesDeJeuPage';
+import ModeDeJeuDetailsPage from './ModeDeJeuDetailsPage';
 import './App.css';
 import backgroundImage from './background.jpg';
-import ModeDeJeuDetailsPage from './ModeDeJeuDetailsPage';
+import homeIcon from './iconeAccueil.png';
 
 function App() {
   const appStyle = {
@@ -19,18 +21,24 @@ function App() {
     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
   };
 
-return (
-        <Router>
-            <div className="App" style={appStyle}>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/personnage/:id" element={<PersonnageDetailsPage />} />
-                    <Route path="/modes-de-jeu" element={<ModesDeJeuPage />} />
-                    <Route path="/modes-de-jeu/:id" element={<ModeDeJeuDetailsPage />} />
-                </Routes>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="App" style={appStyle}>
+        <nav className="navbar">
+          <Link to="/" className="home-icon">
+            <img src={homeIcon} alt="Accueil" />
+          </Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/personnages" element={<AllPersonnagesPage />} />
+          <Route path="/personnage/:id" element={<PersonnageDetailsPage />} />
+          <Route path="/modes-de-jeu" element={<ModesDeJeuPage />} />
+          <Route path="/modes-de-jeu/:id" element={<ModeDeJeuDetailsPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
