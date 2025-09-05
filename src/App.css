@@ -160,34 +160,3 @@ h1, h2, h3, h4 {
   max-width: calc(100% - 250px);
   overflow-y: auto;
 }
-.onglets {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.onglets button {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  font-size: 1em;
-}
-
-.onglets button:hover {
-  background-color: #555;
-}
-
-.onglets button.onglet-actif {
-  background-color: #61dafb;
-  color: #1a1a1a;
-}
-
-.contenu-onglet {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}

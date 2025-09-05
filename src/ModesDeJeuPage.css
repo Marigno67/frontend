@@ -1,0 +1,34 @@
+.modes-dropdown-container {
+  margin-top: 20px;
+}
+
+.modes-dropdown-container label {
+  font-size: 1.2em;
+  margin-right: 15px;
+}
+
+.modes-dropdown-container select {
+  background-color: #333;
+  color: white;
+  border: 1px solid #61dafb;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2361dafb%22%20d%3D%22M287%20185.4L146.2%2044.6%205.4%20185.4c-6.2%206.2-6.2%2016.4%200%2022.6s16.4%206.2%2022.6%200l118.2-118.2%20118.2%20118.2c6.2%206.2%2016.4%206.2%2022.6%200s6.3-16.4.1-22.6z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 0.6em;
+}
+
+.mode-details-card {
+  margin-top: 40px;
+  background-color: rgba(30, 30, 30, 0.8);
+  border: 1px solid #61dafb;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px #61dafb;
+}

@@ -1,0 +1,218 @@
+/* Styles pour la page de détails des personnages */
+.personnage-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.personnage-details-container h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.personnage-details-container img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.onglets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #61dafb;
+}
+
+.onglets button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.onglets button:hover {
+  color: #61dafb;
+}
+
+.onglets button.onglet-actif {
+  color: #61dafb;
+  border-bottom: 2px solid #61dafb;
+  font-weight: bold;
+}
+
+.contenu-onglet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.build-card {
+  width: 350px;
+  background-color: rgba(30, 30, 30, 0.8);
+  border: 1px solid #61dafb;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px #61dafb;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.build-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px #61dafb;
+}
+
+.build-card h4 {
+  color: white;
+  margin-top: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.build-card h4 .arrow {
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
+}
+
+.build-card h4 .arrow.up {
+  transform: rotate(-180deg);
+}
+
+.build-card h5 {
+  color: #61dafb;
+  margin-top: 15px;
+}
+
+.build-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.build-card li {
+  margin-bottom: 5px;
+}
+
+.homepage-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  max-width: calc(100% - 250px);
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+/* Styles pour le bouton "Artefacts" */
+.bouton-artefacts {
+  background-color: #1a1a1a; /* Fond sombre */
+  color: #61dafb; /* Couleur du texte comme votre accent */
+  border: 2px solid #61dafb; /* Bordure colorée */
+  padding: 12px 25px; /* Plus de padding pour un bouton plus large */
+  cursor: pointer;
+  font-size: 1.2em; /* Taille de police légèrement plus grande */
+  font-weight: bold; /* Texte en gras */
+  transition: all 0.3s ease; /* Transition douce pour les effets */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 280px; /* Largeur légèrement augmentée */
+  border-radius: 8px; /* Coins plus arrondis */
+  box-shadow: 0 4px 15px rgba(0, 97, 128, 0.4); /* Ombre lumineuse */
+  margin: 20px auto; /* Centrer le bouton */
+}
+
+.bouton-artefacts:hover {
+  background-color: #61dafb; /* Inverser les couleurs au survol */
+  color: #1a1a1a; /* Texte sombre au survol */
+  box-shadow: 0 6px 20px rgba(0, 97, 128, 0.6); /* Ombre plus prononcée */
+  transform: translateY(-2px); /* Léger mouvement vers le haut */
+}
+
+.bouton-artefacts .arrow {
+  transition: transform 0.3s ease;
+  font-size: 0.9em; /* Taille de flèche légèrement plus grande */
+  margin-left: 15px; /* Plus d'espace entre le texte et la flèche */
+  color: inherit; /* La flèche hérite de la couleur du texte */
+}
+
+.bouton-artefacts:hover .arrow {
+  color: #1a1a1a; /* Couleur de la flèche au survol */
+}
+
+.bouton-artefacts .arrow.up {
+  transform: rotate(-180deg);
+}
+
+/* Vous pouvez aussi améliorer l'apparence des cartes de build pour correspondre */
+.contenu-builds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%; /* S'assure que le contenu prend toute la largeur */
+  max-width: 1000px; /* Limite la largeur pour une meilleure lecture */
+}
+
+.build-card {
+  flex: 1 1 calc(33% - 20px); /* Ajuste la taille des cartes (3 par ligne sur grand écran) */
+  max-width: calc(33% - 20px);
+  min-width: 280px; /* Taille minimale pour les petites cartes */
+  background-color: rgba(30, 30, 30, 0.9); /* Un peu plus opaque */
+  border: 1px solid #61dafb;
+  border-radius: 10px; /* Coins plus arrondis */
+  padding: 25px; /* Plus de padding */
+  box-shadow: 0 0 15px rgba(0, 97, 128, 0.5); /* Ombre plus intense */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.build-card:hover {
+  transform: translateY(-5px) scale(1.02); /* Léger mouvement et zoom au survol */
+  box-shadow: 0 8px 25px rgba(0, 97, 128, 0.7);
+}
+
+.build-card h4 {
+  color: #f0f0f0; /* Couleur du titre du build */
+  font-size: 1.4em;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.build-card h5 {
+  color: #61dafb;
+  font-size: 1.1em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.build-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.build-card li {
+  background-color: rgba(45, 45, 45, 0.7); /* Fond légèrement différent pour les items */
+  padding: 8px 12px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  color: #e0e0e0;
+  font-size: 0.95em;
+  border-left: 3px solid #61dafb; /* Barre de couleur sur le côté */
+  text-align: left;
+}
