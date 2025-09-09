@@ -1,83 +1,43 @@
-/* Styles pour une meilleure mise en page */
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-  max-width: calc(100% - 250px);
-  overflow-y: auto;
-}
-
-/* Styles pour les titres et éléments principaux */
 h1, h2, h3, h4 {
   color: #61dafb;
   text-shadow: 2px 2px 4px #000;
 }
 
+/* Mise en page principale avec la barre de navigation et latérale */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .homepage-container {
   display: flex;
+  flex-grow: 1;
 }
 
-.sidebar {
-  background-color: rgba(0, 0, 0, 0);
-}
-
-/* Styles pour la page de détails des modes de jeu */
-.builds-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.build-card {
-  background-color: rgba(30, 30, 30, 0.8);
-  border: 1px solid #61dafb;
-  border-radius: 8px;
+.main-content {
+  flex-grow: 1;
   padding: 20px;
-  box-shadow: 0 0 10px #61dafb;
+  max-width: calc(100% - 250px);
+  overflow-y: auto;
+  margin: 0 auto;
 }
 
-.build-card h4 {
-  margin-top: 0;
-  color: #f0f0f0;
-}
-
-.build-card h5 {
-  color: #61dafb;
-  margin-top: 15px;
-}
-
-.build-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.build-card li {
-  margin-bottom: 5px;
-}
-
-/* Styles pour l'image du personnage dans la carte de build */
-.personnage-image-small {
-  max-width: 100px; /* Ou la taille que vous souhaitez */
-  height: auto;
-  border-radius: 8px; /* Pour des coins arrondis */
-  margin-top: 10px;
-  display: block; /* Pour qu'elle prenne toute la largeur disponible dans la carte */
-}
-
+/* Styles pour la barre de navigation */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .home-icon {
-  width: 40px; /* Ajustez la taille de l'icône */
+  width: 40px;
   height: auto;
   transition: transform 0.3s;
 }
@@ -91,72 +51,11 @@ h1, h2, h3, h4 {
   transform: scale(1.1);
 }
 
-/* Styles pour la grille de personnages */
-.personnage-grid ul {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Crée une grille de 5 colonnes égales */
-  gap: 20px; /* Espace entre les cartes */
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  justify-items: center; /* Centre les éléments dans la grille */
-}
-
-/* Le reste de votre CSS pour les cartes de personnages reste le même */
-.personnage-card-link {
-  text-decoration: none;
-  color: white;
-}
-
-.personnage-card {
-  width: 200px;
-  height: 250px;
-  overflow: hidden;
-  border-radius: 12px;
-  background-color: rgba(30, 30, 30, 0.8);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  position: relative;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.personnage-card:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
-}
-
-.personnage-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 12px;
-  transition: transform 0.3s;
-}
-
-.personnage-card:hover img {
-  transform: scale(1.1);
-}
-
-.personnage-card h3 {
-  position: absolute;
-  bottom: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
-  width: 100%;
-  padding: 20px 0 10px;
-  margin: 0;
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
-}
-
-/* Assurez-vous que le main-content s'adapte correctement */
-.main-content {
-  flex-grow: 1;
+.sidebar {
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 20px;
-  max-width: calc(100% - 250px);
-  overflow-y: auto;
+  height: 100vh;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  color: white;
 }

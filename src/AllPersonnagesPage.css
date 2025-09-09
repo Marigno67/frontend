@@ -1,35 +1,41 @@
-/* Styles pour la grille de personnages */
+/* Styles pour la page de tous les personnages */
+.all-personnages-page-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.all-personnages-page-container h1 {
+    font-size: 3em;
+    color: #61dafb;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    margin-bottom: 40px;
+}
+
+/* Grille des personnages */
 .personnage-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    gap: 30px;
     list-style: none;
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
     justify-items: center;
-    width: 100%;
 }
 
-/* Styles pour les cartes de personnages */
-.personnage-card-link {
-    text-decoration: none;
-    color: white;
-}
-
+/* Carte de chaque personnage */
 .personnage-card {
-    width: 200px;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: rgba(30, 30, 30, 0.8);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
+    width: 250px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .personnage-card:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
 }
 
 .personnage-card img {
@@ -39,24 +45,38 @@
     position: absolute;
     top: 0;
     left: 0;
-    border-radius: 12px;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
 .personnage-card:hover img {
     transform: scale(1.1);
 }
 
+/* Lien de la carte */
+.personnage-card-link {
+    text-decoration: none;
+    color: white;
+}
+
+/* Nom du personnage en bas de la carte */
 .personnage-card h3 {
     position: absolute;
     bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    left: 0;
     width: 100%;
-    padding: 20px 0 10px;
     margin: 0;
-    text-align: center;
-    font-size: 1.2em;
+    padding: 20px 10px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+    font-size: 1.5em;
     font-weight: bold;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    transition: background 0.3s ease;
+}
+
+/* Chargement */
+.loading {
+    font-size: 1.5em;
+    text-align: center;
+    padding: 50px;
+    color: #f0f0f0;
 }

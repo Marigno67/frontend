@@ -10,19 +10,7 @@ function ModeDeJeuDetailsPage() {
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/modes-de-jeu/${id}`)
             .then(response => response.json())
-            .then(data => {
-                // Tri des builds pour chaque personnage
-                const buildsTries = data.builds.sort((a, b) => {
-                    const nomA = a.personnage ? a.personnage.nom : '';
-                    const nomB = b.personnage ? b.personnage.nom : '';
-
-                    if (nomA === "Sung Jinwoo") return -1;
-                    if (nomB === "Sung Jinwoo") return 1;
-                    return nomA.localeCompare(nomB);
-                });
-
-                setModeDeJeu({ ...data, builds: buildsTries });
-            })
+            .then(data => setModeDeJeu(data))
             .catch(error => console.error('Erreur:', error));
 
         fetch('http://127.0.0.1:8000/api/personnages')

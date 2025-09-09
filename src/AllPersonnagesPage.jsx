@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './AllPersonnagesPage.css';
 
 function AllPersonnagesPage() {
   const [personnages, setPersonnages] = useState([]);
@@ -13,6 +14,7 @@ function AllPersonnagesPage() {
         const sungJinwoo = data.find(p => p.nom === "Sung Jinwoo");
         const autresPersonnages = data.filter(p => p.nom !== "Sung Jinwoo");
         
+        // Tri alphabétique des autres personnages
         autresPersonnages.sort((a, b) => {
           if (a.nom < b.nom) {
             return -1;
@@ -44,28 +46,30 @@ function AllPersonnagesPage() {
 
   return (
     <div className="main-content">
-      <h1>Tous les personnages</h1>
-      <main>
-        {personnages.length > 0 ? (
-          <ul className="personnage-grid">
-            {personnages.map(personnage => (
-              <li key={personnage.id} className="personnage-card">
-                <Link to={`/personnage/${personnage.id}`} className="personnage-card-link">
-                  {personnage.image && (
-                    <img
-                      src={`http://127.0.0.1:8000/uploads/images/${personnage.image}`}
-                      alt={personnage.nom}
-                    />
-                  )}
-                  <h3>{personnage.nom}</h3>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Aucun personnage trouvé.</p>
-        )}
-      </main>
+      <div className="all-personnages-page-container">
+        <h1>Tous les personnages</h1>
+        <main>
+          {personnages.length > 0 ? (
+            <ul className="personnage-grid">
+              {personnages.map(personnage => (
+                <li key={personnage.id} className="personnage-card">
+                  <Link to={`/personnage/${personnage.id}`} className="personnage-card-link">
+                    {personnage.image && (
+                      <img
+                        src={`http://127.0.0.1:8000/uploads/images/${personnage.image}`}
+                        alt={personnage.nom}
+                      />
+                    )}
+                    <h3>{personnage.nom}</h3>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Aucun personnage trouvé.</p>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
