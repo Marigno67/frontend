@@ -50,11 +50,83 @@ function PersonnageDetailsPage() {
                                     <h4>{build.titre}</h4>
                                     <h5>Mode de jeu : {build.modeDeJeu.nom}</h5>
                                     {build.equipements && build.equipements.length > 0 ? (
-                                        <ul>
-                                            {build.equipements.map(equipement => (
-                                                <li key={equipement.id}>{equipement.nom}</li>
-                                            ))}
-                                        </ul>
+                                        (() => {
+                                            const emplacementsGauche = ["Tête", "Torse", "Mains", "Pieds"];
+                                            const emplacementsDroite = ["Cou", "Poignet", "Doigt", "Oreille"];
+
+                                            const equipementsParEmplacement = build.equipements.reduce((acc, equipement) => {
+                                                const emplacement = equipement.emplacement;
+                                                if (!acc[emplacement]) {
+                                                    acc[emplacement] = [];
+                                                }
+                                                acc[emplacement].push(equipement);
+                                                return acc;
+                                            }, {});
+
+                                            return (
+                                                <div className="equipements-groupes">
+                                                    <div className="groupe-equipements-gauche">
+                                                        {emplacementsGauche.map(emplacement => {
+                                                            const equipementsDansEmplacement = equipementsParEmplacement[emplacement];
+                                                            if (equipementsDansEmplacement && equipementsDansEmplacement.length > 0) {
+                                                                return (
+                                                                    <div key={emplacement}>
+                                                                        <h4>{emplacement}</h4>
+                                                                        <div className="liste-items-emplacement">
+                                                                            {equipementsDansEmplacement.map(equipement => (
+                                                                                <div key={equipement.id} className="equipement-item">
+                                                                                    {equipement.image && (
+                                                                                        <img
+                                                                                            src={`http://127.0.0.1:8000/uploads/images/${equipement.image}`}
+                                                                                            alt={equipement.nom}
+                                                                                        />
+                                                                                    )}
+                                                                                    <div className="equipement-details">
+                                                                                        <p><strong>{equipement.nom}</strong></p>
+                                                                                        {equipement.description && <p>{equipement.description}</p>}
+                                                                                    </div>
+                                                                                </div>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            }
+                                                            return null;
+                                                        })}
+                                                    </div>
+
+                                                    <div className="groupe-equipements-droite">
+                                                        {emplacementsDroite.map(emplacement => {
+                                                            const equipementsDansEmplacement = equipementsParEmplacement[emplacement];
+                                                            if (equipementsDansEmplacement && equipementsDansEmplacement.length > 0) {
+                                                                return (
+                                                                    <div key={emplacement}>
+                                                                        <h4>{emplacement}</h4>
+                                                                        <div className="liste-items-emplacement">
+                                                                            {equipementsDansEmplacement.map(equipement => (
+                                                                                <div key={equipement.id} className="equipement-item">
+                                                                                    {equipement.image && (
+                                                                                        <img
+                                                                                            src={`http://127.0.0.1:8000/uploads/images/${equipement.image}`}
+                                                                                            alt={equipement.nom}
+                                                                                        />
+                                                                                    )}
+                                                                                    <div className="equipement-details">
+                                                                                        <p><strong>{equipement.nom}</strong></p>
+                                                                                        {equipement.description && <p>{equipement.description}</p>}
+                                                                                    </div>
+                                                                                </div>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            }
+                                                            return null;
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })()
                                     ) : (
                                         <p>Aucun équipement défini.</p>
                                     )}

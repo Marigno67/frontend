@@ -1,226 +1,45 @@
-/* Styles pour la page de détails des personnages */
-.personnage-details-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
+.equipements-groupes {
+    display: flex; /* Active la flexbox sur le conteneur */
+    justify-content: space-between; /* Espace les deux groupes sur les côtés */
+    gap: 20px; /* Ajoute un espace entre les deux colonnes (facultatif) */
 }
 
-.personnage-details-container h2 {
-  font-size: 2.5em;
-  margin-bottom: 20px;
+.groupe-equipements-gauche,
+.groupe-equipements-droite {
+    flex: 1; /* Permet aux deux groupes de prendre un espace égal */
+    min-width: 0; /* Important pour le comportement de la flexbox */
 }
 
-.personnage-details-container img {
-  max-width: 300px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  margin-bottom: 20px;
-}
-
-.personnage-description p {
-    margin: 0;
-}
-
-/* Styles pour le bouton "Artefacts" */
-.bouton-artefacts {
-  background-color: #1a1a1a;
-  color: #61dafb;
-  border: 2px solid #61dafb;
-  padding: 12px 25px;
-  cursor: pointer;
-  font-size: 1.2em;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 280px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 97, 128, 0.4);
-  margin: 20px auto;
-}
-
-.bouton-artefacts:hover {
-  background-color: #61dafb;
-  color: #1a1a1a;
-  box-shadow: 0 6px 20px rgba(0, 97, 128, 0.6);
-  transform: translateY(-2px);
-}
-
-.bouton-artefacts .arrow {
-  transition: transform 0.3s ease;
-  font-size: 0.9em;
-  margin-left: 15px;
-  color: inherit;
-}
-
-.bouton-artefacts:hover .arrow {
-  color: #1a1a1a;
-}
-
-.bouton-artefacts .arrow.up {
-  transform: rotate(-180deg);
-}
-
-/* Styles pour le contenu des builds */
-.contenu-builds {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 1000px;
-}
-
-.build-card {
-  flex: 1 1 calc(33% - 20px);
-  max-width: calc(33% - 20px);
-  min-width: 280px;
-  background-color: rgba(30, 30, 30, 0.9);
-  border: 1px solid #61dafb;
-  border-radius: 10px;
-  padding: 25px;
-  box-shadow: 0 0 15px rgba(0, 97, 128, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-}
-
-.build-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 97, 128, 0.7);
-}
-
-.build-card h4 {
-  color: #f0f0f0;
-  font-size: 1.4em;
-  margin-bottom: 15px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.build-card h5 {
-  color: #61dafb;
-  font-size: 1.1em;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.build-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.build-card li {
-  background-color: rgba(45, 45, 45, 0.7);
-  padding: 8px 12px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  color: #e0e0e0;
-  font-size: 0.95em;
-  border-left: 3px solid #61dafb;
-  text-align: left;
-}
-
-/* Styles pour la mise en page générale */
-.homepage-container {
-  display: flex;
-  min-height: 100vh;
-}
-
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-  max-width: calc(100% - 250px);
-  overflow-y: auto;
-  margin: 0 auto;
-}
-/* Styles pour le contenu des builds */
-.contenu-builds {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 1000px;
-}
-
-.build-card {
-  background-color: rgba(30, 30, 30, 0.9);
-  border: 1px solid #61dafb;
-  border-radius: 10px;
-  padding: 25px;
-  box-shadow: 0 0 15px rgba(0, 97, 128, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-}
-
-.build-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 97, 128, 0.7);
-}
-
-.build-card h4 {
-  color: #f0f0f0;
-  font-size: 1.4em;
-  margin-bottom: 15px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.build-card h5 {
-  color: #61dafb;
-  font-size: 1.1em;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-/* Styles pour la liste d'équipements */
-.equipements-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: left;
+.liste-items-emplacement {
+    display: grid; /* Utilisez une grille pour les items */
+    grid-template-columns: 1fr; /* Une seule colonne par défaut */
+    gap: 10px; /* Espace entre les items */
 }
 
 .equipement-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  background-color: rgba(45, 45, 45, 0.7);
-  padding: 10px;
-  border-radius: 8px;
-  border-left: 3px solid #61dafb;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex; /* Active la flexbox */
+    align-items: center; /* Aligne les éléments verticalement */
+    gap: 10px; /* Ajoute un espace entre l'image et le texte */
+    padding: 10px;
+    border: 1px solid #444; /* Bordure pour une meilleure visualisation */
+    border-radius: 8px;
+    background-color: #2a2a2a; /* Couleur de fond pour les cartes d'équipement */
+    color: #eee;
 }
 
-.equipement-image {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 5px;
+.equipement-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
 
-.equipement-nom {
-  font-weight: bold;
-  font-size: 1.1em;
-  color: white;
-  margin: 0;
+.equipement-details {
+    display: flex;
+    flex-direction: column; /* Aligne le nom et la description verticalement */
+    justify-content: center;
 }
 
-.equipement-description {
-  font-size: 0.9em;
-  color: #ccc;
-  margin: 5px 0 0;
-  line-height: 1.4;
-}
-
-.equipement-description p {
-  margin: 0;
+.equipement-details p {
+    margin: 0; /* Supprime les marges par défaut des paragraphes pour un meilleur alignement */
+    font-size: 14px;
 }
