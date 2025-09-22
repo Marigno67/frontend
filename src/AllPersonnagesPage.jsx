@@ -7,7 +7,7 @@ function AllPersonnagesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/personnages')
+    fetch(`${process.env.REACT_APP_API_URL}/api/personnages`)
       .then(response => response.json())
       .then(data => {
         // Logique de tri pour mettre Sung Jinwoo en premier
@@ -15,16 +15,7 @@ function AllPersonnagesPage() {
         const autresPersonnages = data.filter(p => p.nom !== "Sung Jinwoo");
         
         // Tri alphabétique des autres personnages
-        autresPersonnages.sort((a, b) => {
-          if (a.nom < b.nom) {
-            return -1;
-          }
-          if (a.nom > b.nom) {
-            return 1;
-          }
-          return 0;
-        });
-
+        autresPersonnages.sort((a, b) => a.nom.localeCompare(b.nom));
         // Fusion des deux listes pour avoir Sung Jinwoo en premier
         if (sungJinwoo) {
           setPersonnages([sungJinwoo, ...autresPersonnages]);
@@ -56,7 +47,7 @@ function AllPersonnagesPage() {
                   <Link to={`/personnage/${personnage.id}`} className="personnage-card-link">
                     {personnage.image && (
                       <img
-                        src={`http://127.0.0.1:8000/uploads/images/${personnage.image}`}
+                        src={`${process.env.REACT_APP_API_URL}/uploads/images/${personnage.image}`}
                         alt={personnage.nom}
                       />
                     )}

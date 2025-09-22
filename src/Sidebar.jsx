@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
+import homeIcon from './iconeAccueil.png';
 
 function Sidebar() {
   return (
     <div className="sidebar">
+      <div className="sidebar-header">
+        <Link to="/" className="sidebar-home-link">
+          <img src={homeIcon} alt="Accueil" className="sidebar-home-icon" />
+        </Link>
+      </div>
+      
+      {/* Le reste du menu */}
       <div className="menu-item">
         <Link to="/personnages" className="sidebar-link">
           Personnages

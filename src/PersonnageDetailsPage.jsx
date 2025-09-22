@@ -1,145 +1,154 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import './PersonnageDetailsPage.css';
+import Sidebar from './Sidebar';
 
-function PersonnageDetailsPage() {
+const PersonnageDetailsPage = () => {
     const { id } = useParams();
     const [personnage, setPersonnage] = useState(null);
+    const [ongletActif, setOngletActif] = useState('Builds');
     const [buildsAffiches, setBuildsAffiches] = useState(false);
+    const [buildSelectionne, setBuildSelectionne] = useState(null);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/personnages/${id}`)
-            .then(response => response.json())
-            .then(data => {
+        const fetchPersonnage = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/personnages/${id}`);
+                const data = response.data;
                 setPersonnage(data);
-            })
-            .catch(error => console.error('Erreur:', error));
+                if (data.builds && data.builds.length > 0) {
+                    setBuildsAffiches(true);
+                    setBuildSelectionne(data.builds[0]);
+                }
+            } catch (error) {
+                console.error('Erreur lors de la récupération du personnage :', error);
+            }
+        };
+
+        fetchPersonnage();
     }, [id]);
 
     if (!personnage) {
-        return <div>Chargement...</div>;
+        return <div className="loading">Chargement...</div>;
     }
 
-    const basculerBuilds = () => {
-        setBuildsAffiches(!buildsAffiches);
+    const emplacementsGauche = ["Tête", "Torse", "Mains", "Pieds"];
+    const emplacementsDroite = ["Cou", "Poignet", "Doigt", "Oreille"];
+
+    const equipementsParEmplacement = buildSelectionne ? buildSelectionne.equipements.reduce((acc, equipement) => {
+        const emplacement = equipement.emplacement;
+        if (!acc[emplacement]) {
+            acc[emplacement] = [];
+        }
+        acc[emplacement].push(equipement);
+        return acc;
+    }, {}) : {};
+
+    const handleOngletClick = (onglet) => {
+        setOngletActif(onglet);
+        if (onglet === 'Builds' && personnage.builds && personnage.builds.length > 0) {
+            setBuildsAffiches(true);
+            setBuildSelectionne(personnage.builds[0]);
+        } else {
+            setBuildsAffiches(false);
+        }
     };
 
     return (
-        <div className="homepage-container">
-            <Sidebar personnages={null} />
-            <div className="main-content personnage-details-container">
-                <Link to="/personnages">Retour à la liste</Link>
-                <h2>{personnage.nom}</h2>
-                {personnage.image && (
-                    <img src={`http://127.0.0.1:8000/uploads/images/${personnage.image}`} alt={personnage.nom} />
-                )}
-                <div className="personnage-description" dangerouslySetInnerHTML={{ __html: personnage.description }}></div>
-
-                <h3>Builds</h3>
-                <button className="bouton-artefacts" onClick={basculerBuilds}>
-                    Artefacts
-                    <span className={`arrow ${buildsAffiches ? 'up' : 'down'}`}>▼</span>
-                </button>
-
-                {buildsAffiches && (
-                    <div className="contenu-builds">
-                        {personnage.builds && personnage.builds.length > 0 ? (
-                            personnage.builds.map(build => (
-                                <div key={build.id} className="build-card">
-                                    <h4>{build.titre}</h4>
-                                    <h5>Mode de jeu : {build.modeDeJeu.nom}</h5>
-                                    {build.equipements && build.equipements.length > 0 ? (
-                                        (() => {
-                                            const emplacementsGauche = ["Tête", "Torse", "Mains", "Pieds"];
-                                            const emplacementsDroite = ["Cou", "Poignet", "Doigt", "Oreille"];
-
-                                            const equipementsParEmplacement = build.equipements.reduce((acc, equipement) => {
-                                                const emplacement = equipement.emplacement;
-                                                if (!acc[emplacement]) {
-                                                    acc[emplacement] = [];
-                                                }
-                                                acc[emplacement].push(equipement);
-                                                return acc;
-                                            }, {});
-
-                                            return (
-                                                <div className="equipements-groupes">
-                                                    <div className="groupe-equipements-gauche">
-                                                        {emplacementsGauche.map(emplacement => {
-                                                            const equipementsDansEmplacement = equipementsParEmplacement[emplacement];
-                                                            if (equipementsDansEmplacement && equipementsDansEmplacement.length > 0) {
-                                                                return (
-                                                                    <div key={emplacement}>
-                                                                        <h4>{emplacement}</h4>
-                                                                        <div className="liste-items-emplacement">
-                                                                            {equipementsDansEmplacement.map(equipement => (
-                                                                                <div key={equipement.id} className="equipement-item">
-                                                                                    {equipement.image && (
-                                                                                        <img
-                                                                                            src={`http://127.0.0.1:8000/uploads/images/${equipement.image}`}
-                                                                                            alt={equipement.nom}
-                                                                                        />
-                                                                                    )}
-                                                                                    <div className="equipement-details">
-                                                                                        <p><strong>{equipement.nom}</strong></p>
-                                                                                        {equipement.description && <p>{equipement.description}</p>}
-                                                                                    </div>
-                                                                                </div>
-                                                                            ))}
-                                                                        </div>
-                                                                    </div>
-                                                                );
-                                                            }
-                                                            return null;
-                                                        })}
-                                                    </div>
-
-                                                    <div className="groupe-equipements-droite">
-                                                        {emplacementsDroite.map(emplacement => {
-                                                            const equipementsDansEmplacement = equipementsParEmplacement[emplacement];
-                                                            if (equipementsDansEmplacement && equipementsDansEmplacement.length > 0) {
-                                                                return (
-                                                                    <div key={emplacement}>
-                                                                        <h4>{emplacement}</h4>
-                                                                        <div className="liste-items-emplacement">
-                                                                            {equipementsDansEmplacement.map(equipement => (
-                                                                                <div key={equipement.id} className="equipement-item">
-                                                                                    {equipement.image && (
-                                                                                        <img
-                                                                                            src={`http://127.0.0.1:8000/uploads/images/${equipement.image}`}
-                                                                                            alt={equipement.nom}
-                                                                                        />
-                                                                                    )}
-                                                                                    <div className="equipement-details">
-                                                                                        <p><strong>{equipement.nom}</strong></p>
-                                                                                        {equipement.description && <p>{equipement.description}</p>}
-                                                                                    </div>
-                                                                                </div>
-                                                                            ))}
-                                                                        </div>
-                                                                    </div>
-                                                                );
-                                                            }
-                                                            return null;
-                                                        })}
-                                                    </div>
-                                                </div>
-                                            );
-                                        })()
-                                    ) : (
-                                        <p>Aucun équipement défini.</p>
-                                    )}
-                                </div>
-                            ))
-                        ) : (
-                            <p>Aucun build associé à ce personnage.</p>
-                        )}
-                    </div>
-                )}
+        <div className="personnage-details-page">
+            <div className="details-header">
+                <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${personnage.image}`} alt={personnage.nom} className="personnage-image" />
+                <div className="details-info">
+                    <h1>{personnage.nom}</h1>
+                    <p>{personnage.description}</p>
+                </div>
             </div>
+
+            <div className="onglets-navigation">
+                <button onClick={() => handleOngletClick('Builds')} className={ongletActif === 'Builds' ? 'active' : ''}>
+                    Builds
+                </button>
+            </div>
+
+            {ongletActif === 'Builds' && personnage.builds && personnage.builds.length > 0 && (
+                <div className="builds-container">
+                    <div className="build-sidebar">
+                        <div className="build-sidebar-title">
+                            <h3>Équipements du build</h3>
+                        </div>
+                        {personnage.builds.map(build => (
+                            <button
+                                key={build.id}
+                                onClick={() => setBuildSelectionne(build)}
+                                className={buildSelectionne && buildSelectionne.id === build.id ? 'active' : ''}
+                            >
+                                {build.modeDeJeu.nom}
+                            </button>
+                        ))}
+                    </div>
+                    {buildSelectionne ? (
+                        <div className="build-details-container">
+                            <div className="build-details-header">
+                                <h2>{buildSelectionne.titre}</h2>
+                                <h4>Mode de jeu: {buildSelectionne.modeDeJeu.nom}</h4>
+                            </div>
+                            <div className="equipements-groupes">
+                                <div className="groupe-equipements-gauche">
+                                    {emplacementsGauche.map(emplacement => {
+                                        const equipementsDansEmplacement = equipementsParEmplacement[emplacement] || [];
+                                        return (
+                                            <div key={emplacement} className="equipement-emplacement-card">
+                                                <h4>{emplacement}</h4>
+                                                {equipementsDansEmplacement.length > 0 ? (
+                                                    equipementsDansEmplacement.map(equipement => (
+                                                        <div key={equipement.id} className="equipement-item">
+                                                            {equipement.image && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${equipement.image}`} alt={equipement.nom} />}
+                                                            <div className="equipement-details">
+                                                                <h5>{equipement.nom}</h5>
+                                                                {equipement.description && <p dangerouslySetInnerHTML={{ __html: equipement.description }}></p>}
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <p>Aucun équipement défini.</p>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                                <div className="groupe-equipements-droite">
+                                    {emplacementsDroite.map(emplacement => {
+                                        const equipementsDansEmplacement = equipementsParEmplacement[emplacement] || [];
+                                        return (
+                                            <div key={emplacement} className="equipement-emplacement-card">
+                                                <h4>{emplacement}</h4>
+                                                {equipementsDansEmplacement.length > 0 ? (
+                                                    equipementsDansEmplacement.map(equipement => (
+                                                        <div key={equipement.id} className="equipement-item">
+                                                            {equipement.image && <img src={`http://127.0.0.1:8000/uploads/images/${equipement.image}`} alt={equipement.nom} />}
+                                                            <div className="equipement-details">
+                                                                <h5>{equipement.nom}</h5>
+                                                                {equipement.description && <p dangerouslySetInnerHTML={{ __html: equipement.description }}></p>}
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <p>Aucun équipement défini.</p>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <p>Sélectionnez un build pour voir les détails.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
-}
+};
 
 export default PersonnageDetailsPage;

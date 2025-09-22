@@ -66,3 +66,24 @@
 .sidebar-link:hover {
   color: #61dafb;
 }
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 25px; /* Espace entre l'icône et les liens */
+  padding-bottom: 20px;
+  border-bottom: 1px solid #444; /* Ligne de séparation */
+}
+
+.sidebar-home-link {
+  display: inline-block;
+}
+
+.sidebar-home-icon {
+  width: 50px; /* Taille de l'icône */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-home-icon:hover {
+  transform: scale(1.15); /* Effet au survol */
+}

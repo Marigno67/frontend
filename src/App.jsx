@@ -1,5 +1,7 @@
+// src/App.jsx
+
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Link a été supprimé car plus utilisé ici
 import HomePage from './HomePage';
 import AllPersonnagesPage from './AllPersonnagesPage';
 import PersonnageDetailsPage from './PersonnageDetailsPage';
@@ -7,7 +9,8 @@ import ModesDeJeuPage from './ModesDeJeuPage';
 import ModeDeJeuDetailsPage from './ModeDeJeuDetailsPage';
 import './App.css';
 import backgroundImage from './background.jpg';
-import homeIcon from './iconeAccueil.png';
+// L'import de homeIcon est supprimé car il est maintenant dans la Sidebar
+import Sidebar from './Sidebar'; // <-- AJOUTER L'IMPORT DE LA SIDEBAR
 
 function App() {
   const appStyle = {
@@ -24,18 +27,19 @@ function App() {
   return (
     <Router>
       <div className="App" style={appStyle}>
-        <nav className="navbar">
-          <Link to="/" className="home-icon">
-            <img src={homeIcon} alt="Accueil" />
-          </Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/personnages" element={<AllPersonnagesPage />} />
-          <Route path="/personnage/:id" element={<PersonnageDetailsPage />} />
-          <Route path="/modes-de-jeu" element={<ModesDeJeuPage />} />
-          <Route path="/modes-de-jeu/:id" element={<ModeDeJeuDetailsPage />} />
-        </Routes>
+        {/* NOUVELLE STRUCTURE DE MISE EN PAGE */}
+        <div className="app-container">
+          <Sidebar /> {/* La Sidebar est maintenant ici, en permanence */}
+          <main className="main-content"> {/* Le contenu de la page prend le reste de la place */}
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/personnages" element={<AllPersonnagesPage />} />
+              <Route path="/personnage/:id" element={<PersonnageDetailsPage />} />
+              <Route path="/modes-de-jeu" element={<ModesDeJeuPage />} />
+              <Route path="/modes-de-jeu/:id" element={<ModeDeJeuDetailsPage />} />
+            </Routes>
+          </main>
+        </div>
       </div>
     </Router>
   );

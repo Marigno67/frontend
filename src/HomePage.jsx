@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
 
 function HomePage() {
   const [personnages, setPersonnages] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/personnages')
+    fetch(`${process.env.REACT_APP_API_URL}/api/personnages`)
       .then(response => response.json())
       .then(data => setPersonnages(data))
       .catch(error => console.error('Erreur:', error));
@@ -13,7 +12,6 @@ function HomePage() {
 
   return (
     <div className="homepage-container homepage-custom-background">
-      <Sidebar personnages={personnages} />
       <div className="main-content">
         <h1>Bienvenue sur le site des builds de Solo Leveling !</h1>
         <main>

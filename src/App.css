@@ -1,61 +1,29 @@
+/* src/App.css */
+
 h1, h2, h3, h4 {
   color: #61dafb;
   text-shadow: 2px 2px 4px #000;
 }
 
-/* Mise en page principale avec la barre de navigation et latérale */
 .App {
-  display: flex;
-  flex-direction: column;
+  /* On n'a plus besoin de flex-direction ici */
   min-height: 100vh;
 }
 
+/* NOUVEAU CONTENEUR PRINCIPAL */
+.app-container {
+  display: flex; /* Aligne la Sidebar et le contenu principal côte à côte */
+}
+
+/* On retire le display:flex de l'ancien conteneur */
 .homepage-container {
-  display: flex;
+  /* display: flex; */ /* <-- SUPPRIMER CETTE LIGNE */
   flex-grow: 1;
 }
 
 .main-content {
-  flex-grow: 1;
-  padding: 20px;
-  max-width: calc(100% - 250px);
+  flex-grow: 1; /* Permet au contenu de prendre toute la place restante */
+  padding: 20px 40px; /* Un peu plus de padding horizontal */
+  max-width: calc(100% - 250px); /* 250px est la largeur de la sidebar */
   overflow-y: auto;
-  margin: 0 auto;
-}
-
-/* Styles pour la barre de navigation */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.home-icon {
-  width: 40px;
-  height: auto;
-  transition: transform 0.3s;
-}
-
-.home-icon img {
-  width: 100%;
-  height: auto;
-}
-
-.home-icon:hover {
-  transform: scale(1.1);
-}
-
-.sidebar {
-  width: 250px;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  height: 100vh;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  color: white;
 }

@@ -7,7 +7,7 @@ function ModesDeJeuPage() {
   const [modeSelectionne, setModeSelectionne] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/modes-de-jeu')
+    fetch(`${process.env.REACT_APP_API_URL}/api/modes-de-jeu`)
       .then(response => response.json())
       .then(data => {
         setModesDeJeu(data);
