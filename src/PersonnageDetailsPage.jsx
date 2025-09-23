@@ -2,25 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './PersonnageDetailsPage.css';
-import Sidebar from './Sidebar';
 
 const PersonnageDetailsPage = () => {
     const { id } = useParams();
     const [personnage, setPersonnage] = useState(null);
-    const [ongletActif, setOngletActif] = useState('Builds');
-    const [buildsAffiches, setBuildsAffiches] = useState(false);
-    const [buildSelectionne, setBuildSelectionne] = useState(null);
+    
+    // MODIFIÉ : Renommage des variables et de l'onglet actif par défaut
+    const [ongletActif, setOngletActif] = useState('Artefacts');
+    const [artefactsAffiches, setArtefactsAffiches] = useState(false);
+    const [artefactSelectionne, setArtefactSelectionne] = useState(null);
 
     useEffect(() => {
         const fetchPersonnage = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/personnages/${id}`);
-                const data = response.data;
-                setPersonnage(data);
-                if (data.builds && data.builds.length > 0) {
-                    setBuildsAffiches(true);
-                    setBuildSelectionne(data.builds[0]);
-                }
+                setPersonnage(response.data);
             } catch (error) {
                 console.error('Erreur lors de la récupération du personnage :', error);
             }
@@ -36,7 +32,8 @@ const PersonnageDetailsPage = () => {
     const emplacementsGauche = ["Tête", "Torse", "Mains", "Pieds"];
     const emplacementsDroite = ["Cou", "Poignet", "Doigt", "Oreille"];
 
-    const equipementsParEmplacement = buildSelectionne ? buildSelectionne.equipements.reduce((acc, equipement) => {
+    // MODIFIÉ : Utilisation de la nouvelle variable 'artefactSelectionne'
+    const equipementsParEmplacement = artefactSelectionne ? artefactSelectionne.equipements.reduce((acc, equipement) => {
         const emplacement = equipement.emplacement;
         if (!acc[emplacement]) {
             acc[emplacement] = [];
@@ -47,11 +44,15 @@ const PersonnageDetailsPage = () => {
 
     const handleOngletClick = (onglet) => {
         setOngletActif(onglet);
-        if (onglet === 'Builds' && personnage.builds && personnage.builds.length > 0) {
-            setBuildsAffiches(true);
-            setBuildSelectionne(personnage.builds[0]);
-        } else {
-            setBuildsAffiches(false);
+        
+        // MODIFIÉ : Logique adaptée pour 'Artefacts'
+        if (onglet === 'Artefacts') {
+            if (artefactsAffiches) {
+                setArtefactsAffiches(false);
+            } else if (personnage.builds && personnage.builds.length > 0) {
+                setArtefactsAffiches(true);
+                setArtefactSelectionne(personnage.builds[0]);
+            }
         }
     };
 
@@ -66,34 +67,39 @@ const PersonnageDetailsPage = () => {
             </div>
 
             <div className="onglets-navigation">
-                <button onClick={() => handleOngletClick('Builds')} className={ongletActif === 'Builds' ? 'active' : ''}>
-                    Builds
+                {/* MODIFIÉ : Texte du bouton et condition d'activation */}
+                <button onClick={() => handleOngletClick('Artefacts')} className={ongletActif === 'Artefacts' ? 'active' : ''}>
+                    Artefacts
                 </button>
             </div>
 
-            {ongletActif === 'Builds' && personnage.builds && personnage.builds.length > 0 && (
+            {/* MODIFIÉ : Condition d'affichage et boucle sur les données */}
+            {artefactsAffiches && personnage.builds && personnage.builds.length > 0 && (
                 <div className="builds-container">
                     <div className="build-sidebar">
                         <div className="build-sidebar-title">
-                            <h3>Équipements du build</h3>
+                            {/* MODIFIÉ : Titre */}
+                            <h3>Artefacts équipés</h3>
                         </div>
-                        {personnage.builds.map(build => (
+                        {/* Note : personnage.builds vient de l'API, mais on l'appelle 'artefact' dans notre code */}
+                        {personnage.builds.map(artefact => (
                             <button
-                                key={build.id}
-                                onClick={() => setBuildSelectionne(build)}
-                                className={buildSelectionne && buildSelectionne.id === build.id ? 'active' : ''}
+                                key={artefact.id}
+                                onClick={() => setArtefactSelectionne(artefact)}
+                                className={artefactSelectionne && artefactSelectionne.id === artefact.id ? 'active' : ''}
                             >
-                                {build.modeDeJeu.nom}
+                                {artefact.modeDeJeu.nom}
                             </button>
                         ))}
                     </div>
-                    {buildSelectionne ? (
+                    {artefactSelectionne ? (
                         <div className="build-details-container">
                             <div className="build-details-header">
-                                <h2>{buildSelectionne.titre}</h2>
-                                <h4>Mode de jeu: {buildSelectionne.modeDeJeu.nom}</h4>
+                                <h2>{artefactSelectionne.titre}</h2>
+                                <h4>Mode de jeu: {artefactSelectionne.modeDeJeu.nom}</h4>
                             </div>
                             <div className="equipements-groupes">
+                                {/* ... le reste du code pour afficher les équipements ne change pas ... */}
                                 <div className="groupe-equipements-gauche">
                                     {emplacementsGauche.map(emplacement => {
                                         const equipementsDansEmplacement = equipementsParEmplacement[emplacement] || [];
@@ -126,7 +132,7 @@ const PersonnageDetailsPage = () => {
                                                 {equipementsDansEmplacement.length > 0 ? (
                                                     equipementsDansEmplacement.map(equipement => (
                                                         <div key={equipement.id} className="equipement-item">
-                                                            {equipement.image && <img src={`http://127.0.0.1:8000/uploads/images/${equipement.image}`} alt={equipement.nom} />}
+                                                            {equipement.image && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${equipement.image}`} alt={equipement.nom} />}
                                                             <div className="equipement-details">
                                                                 <h5>{equipement.nom}</h5>
                                                                 {equipement.description && <p dangerouslySetInnerHTML={{ __html: equipement.description }}></p>}
@@ -143,7 +149,8 @@ const PersonnageDetailsPage = () => {
                             </div>
                         </div>
                     ) : (
-                        <p>Sélectionnez un build pour voir les détails.</p>
+                         // MODIFIÉ : Message
+                        <p>Sélectionnez un Artefact pour voir les détails.</p>
                     )}
                 </div>
             )}

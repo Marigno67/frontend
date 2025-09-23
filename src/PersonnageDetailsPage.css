@@ -103,3 +103,70 @@
     font-size: 14px;
     color: #ccc;
 }
+
+/* ... votre css existant ... */
+
+/* Style pour le bouton principal "Artefacts" */
+.onglets-navigation button {
+    background-color: transparent;
+    border: 1px solid #61dafb;
+    color: #61dafb;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Style pour les boutons dans la sidebar des artefacts */
+.build-sidebar button {
+    padding: 12px 15px;
+    background-color: transparent; /* Fond transparent */
+    border: 1px solid #555; /* Bordure discrète */
+    color: #ccc;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease; /* Transition douce */
+}
+
+/* Effet au survol et quand le bouton est actif */
+.onglets-navigation button:hover,
+.onglets-navigation button.active,
+.build-sidebar button:hover,
+.build-sidebar button.active {
+    background-color: #61dafb;
+    color: #1a1a1a; /* Couleur de fond sombre pour le texte */
+    box-shadow: 0 0 15px #61dafb; /* Effet de lueur */
+    border-color: #61dafb;
+}
+.details-header {
+    display: flex;
+    flex-direction: column; /* Aligne les éléments verticalement */
+    align-items: center;   /* Centre les éléments horizontalement */
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Le cadre de l'image du personnage */
+.personnage-image {
+    width: 300px;          /* Largeur fixe */
+    height: 300px;         /* Hauteur fixe */
+    border-radius: 50%;    /* Pour un cadre parfaitement circulaire */
+    
+    /* La magie opère ici : */
+    object-fit: cover;     /* L'image couvre tout le cadre sans se déformer */
+    
+    /* Un peu de style pour correspondre à votre thème */
+    border: 3px solid #61dafb;
+    box-shadow: 0 0 20px rgba(97, 218, 251, 0.7);
+    margin-bottom: 20px;
+}
+
+/* Le conteneur pour le nom et la description */
+.details-info h1 {
+    margin-top: 0;
+}
