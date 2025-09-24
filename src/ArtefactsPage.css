@@ -1,0 +1,117 @@
+.artefacts-page-container {
+    padding: 20px;
+}
+
+.artefacts-page-container h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.artefacts-table {
+    border: 1px solid #444;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    background-color: #1a1a1a;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #61dafb;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.set-column-header,
+.bonuses-column-header {
+    padding: 15px;
+}
+
+.artefact-row {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    border-top: 1px solid #444;
+    align-items: center;
+}
+
+.set-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    border-right: 1px solid #444;
+}
+
+.set-column img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.set-column h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.4em;
+    color: #fff;
+}
+
+.set-column span {
+    color: #aaa;
+    font-style: italic;
+}
+
+.bonuses-column {
+    padding: 20px;
+}
+
+.bonus-item {
+    margin-bottom: 20px;
+}
+.bonus-item:last-child {
+    margin-bottom: 0;
+}
+
+.bonus-item h4 {
+    color: #61dafb;
+    font-size: 1.1em;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+/* Style pour le contenu HTML de la description */
+.bonus-item div {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+.bonus-item ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.set-image-gallery {
+    display: grid;
+    /* On affiche les images sur 2 colonnes */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; /* Espace entre les images */
+    margin-bottom: 15px;
+    max-width: 180px; /* Largeur maximale pour le conteneur de la galerie */
+}
+
+.set-piece-image {
+    width: 100%; /* L'image prend toute la largeur de sa cellule de grille */
+    height: auto;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    box-sizing: border-box; /* Assure que le padding ne s'ajoute pas à la largeur */
+}
+
+/* On supprime la taille max de l'ancien 'set-column img' pour éviter les conflits */
+.set-column img {
+    max-width: none;
+}

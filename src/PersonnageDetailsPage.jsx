@@ -6,11 +6,12 @@ import './PersonnageDetailsPage.css';
 const PersonnageDetailsPage = () => {
     const { id } = useParams();
     const [personnage, setPersonnage] = useState(null);
-    
-    // MODIFIÉ : Renommage des variables et de l'onglet actif par défaut
-    const [ongletActif, setOngletActif] = useState('Artefacts');
+    const [ongletActif, setOngletActif] = useState(null);
     const [artefactsAffiches, setArtefactsAffiches] = useState(false);
     const [artefactSelectionne, setArtefactSelectionne] = useState(null);
+
+    // Nouvel état pour la visibilité des statistiques
+    const [statsAffiches, setStatsAffiches] = useState(false);
 
     useEffect(() => {
         const fetchPersonnage = async () => {
@@ -25,6 +26,33 @@ const PersonnageDetailsPage = () => {
         fetchPersonnage();
     }, [id]);
 
+    // Logique pour gérer le clic sur les onglets
+    const handleOngletClick = (onglet) => {
+        // Si on clique sur l'onglet déjà actif, on le ferme
+        if (onglet === ongletActif) {
+            setOngletActif(null);
+            setStatsAffiches(false);
+            setArtefactsAffiches(false);
+            return;
+        }
+
+        setOngletActif(onglet);
+
+        // Logique pour afficher/cacher les sections
+        if (onglet === 'Statistiques') {
+            setStatsAffiches(true);
+            setArtefactsAffiches(false);
+        }
+
+        if (onglet === 'Artefacts') {
+            setArtefactsAffiches(true);
+            if (personnage && personnage.builds && personnage.builds.length > 0) {
+                setArtefactSelectionne(personnage.builds[0]);
+            }
+            setStatsAffiches(false);
+        }
+    };
+
     if (!personnage) {
         return <div className="loading">Chargement...</div>;
     }
@@ -32,7 +60,6 @@ const PersonnageDetailsPage = () => {
     const emplacementsGauche = ["Tête", "Torse", "Mains", "Pieds"];
     const emplacementsDroite = ["Cou", "Poignet", "Doigt", "Oreille"];
 
-    // MODIFIÉ : Utilisation de la nouvelle variable 'artefactSelectionne'
     const equipementsParEmplacement = artefactSelectionne ? artefactSelectionne.equipements.reduce((acc, equipement) => {
         const emplacement = equipement.emplacement;
         if (!acc[emplacement]) {
@@ -42,46 +69,47 @@ const PersonnageDetailsPage = () => {
         return acc;
     }, {}) : {};
 
-    const handleOngletClick = (onglet) => {
-        setOngletActif(onglet);
-        
-        // MODIFIÉ : Logique adaptée pour 'Artefacts'
-        if (onglet === 'Artefacts') {
-            if (artefactsAffiches) {
-                setArtefactsAffiches(false);
-            } else if (personnage.builds && personnage.builds.length > 0) {
-                setArtefactsAffiches(true);
-                setArtefactSelectionne(personnage.builds[0]);
-            }
-        }
-    };
-
     return (
         <div className="personnage-details-page">
             <div className="details-header">
                 <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${personnage.image}`} alt={personnage.nom} className="personnage-image" />
                 <div className="details-info">
                     <h1>{personnage.nom}</h1>
-                    <p>{personnage.description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: personnage.description }} />
                 </div>
             </div>
 
             <div className="onglets-navigation">
-                {/* MODIFIÉ : Texte du bouton et condition d'activation */}
+                <button onClick={() => handleOngletClick('Statistiques')} className={ongletActif === 'Statistiques' ? 'active' : ''}>
+                    Statistiques à viser
+                </button>
                 <button onClick={() => handleOngletClick('Artefacts')} className={ongletActif === 'Artefacts' ? 'active' : ''}>
                     Artefacts
                 </button>
             </div>
 
-            {/* MODIFIÉ : Condition d'affichage et boucle sur les données */}
+            {/* Affichage conditionnel pour les statistiques */}
+            {statsAffiches && personnage.statistiques && personnage.statistiques.length > 0 && (
+                <div className="stats-container">
+                    <h2>Statistiques à viser</h2>
+                    <div className="stats-grid">
+                        {personnage.statistiques.map(stat => (
+                            <div key={stat.id} className="stat-card">
+                                <h4>{stat.nom}</h4>
+                                <p>{stat.valeur}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Affichage conditionnel pour les artefacts */}
             {artefactsAffiches && personnage.builds && personnage.builds.length > 0 && (
                 <div className="builds-container">
                     <div className="build-sidebar">
                         <div className="build-sidebar-title">
-                            {/* MODIFIÉ : Titre */}
                             <h3>Artefacts équipés</h3>
                         </div>
-                        {/* Note : personnage.builds vient de l'API, mais on l'appelle 'artefact' dans notre code */}
                         {personnage.builds.map(artefact => (
                             <button
                                 key={artefact.id}
@@ -99,7 +127,6 @@ const PersonnageDetailsPage = () => {
                                 <h4>Mode de jeu: {artefactSelectionne.modeDeJeu.nom}</h4>
                             </div>
                             <div className="equipements-groupes">
-                                {/* ... le reste du code pour afficher les équipements ne change pas ... */}
                                 <div className="groupe-equipements-gauche">
                                     {emplacementsGauche.map(emplacement => {
                                         const equipementsDansEmplacement = equipementsParEmplacement[emplacement] || [];
@@ -149,7 +176,6 @@ const PersonnageDetailsPage = () => {
                             </div>
                         </div>
                     ) : (
-                         // MODIFIÉ : Message
                         <p>Sélectionnez un Artefact pour voir les détails.</p>
                     )}
                 </div>
