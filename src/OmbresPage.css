@@ -1,0 +1,45 @@
+.ombres-page-container {
+    padding: 20px;
+}
+
+.ombres-page-container h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.ombres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.ombre-card {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.ombre-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.ombre-info {
+    padding: 20px;
+}
+
+.ombre-info h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.ombre-description {
+    color: #ccc;
+    line-height: 1.6;
+}

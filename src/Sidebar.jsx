@@ -29,6 +29,12 @@ function Sidebar() {
           Artefacts
         </Link>
       </div>
+
+      <div className="menu-item">
+        <Link to="/ombres" className="sidebar-link">
+          Ombres
+        </Link>
+      </div>
       
     </div>
   );
