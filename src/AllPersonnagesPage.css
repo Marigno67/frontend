@@ -80,3 +80,51 @@
     padding: 50px;
     color: #f0f0f0;
 }
+
+.element-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.element-filter-btn {
+    background-color: transparent;
+    border: 2px solid #555;
+    border-radius: 50%; /* Rend les boutons ronds */
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 50px; /* Taille fixe */
+    height: 50px; /* Taille fixe */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    color: #fff;
+}
+
+.element-filter-btn img {
+    width: 32px;
+    height: 32px;
+}
+
+.element-filter-btn:hover {
+    border-color: #61dafb;
+}
+
+.element-filter-btn.active {
+    border-color: #61dafb;
+    box-shadow: 0 0 15px #61dafb;
+    transform: scale(1.1);
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 50px;
+}
