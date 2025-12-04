@@ -213,3 +213,153 @@
     font-weight: bold;
     color: #fff; /* Couleur vive pour la valeur */
 }
+
+/* MEDIA QUERIES POUR LA RESPONSIVITÉ */
+@media (max-width: 992px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .equipements-groupes {
+        flex-direction: column;
+    }
+
+    .groupe-equipements-gauche,
+    .groupe-equipements-droite {
+        flex-basis: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .personnage-image {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 15px;
+    }
+
+    .details-header {
+        margin-bottom: 25px;
+    }
+
+    .details-info h1 {
+        font-size: 2em;
+    }
+
+    .stats-container {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        padding: 15px;
+    }
+
+    .stats-container h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-card h4 {
+        font-size: 0.8em;
+    }
+
+    .stat-card p {
+        font-size: 1em;
+    }
+
+    .builds-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .build-sidebar {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .build-details-container {
+        padding: 15px;
+    }
+
+    .equipements-groupes {
+        gap: 15px;
+    }
+
+    .equipement-item {
+        gap: 10px;
+    }
+
+    .equipement-item img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .personnage-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .details-info h1 {
+        font-size: 1.5em;
+    }
+
+    .stats-container {
+        padding: 10px;
+    }
+
+    .stats-container h2 {
+        font-size: 1.3em;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 10px;
+    }
+
+    .build-sidebar {
+        padding: 10px;
+    }
+
+    .build-sidebar button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .build-details-container {
+        padding: 10px;
+    }
+
+    .equipement-emplacement-card {
+        padding: 12px;
+    }
+
+    .equipement-item img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .equipement-details h5 {
+        font-size: 0.95em;
+    }
+
+    .equipement-details p {
+        font-size: 12px;
+    }
+
+    .onglets-navigation button {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+}

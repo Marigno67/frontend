@@ -6,25 +6,77 @@ h1, h2, h3, h4 {
 }
 
 .App {
-  /* On n'a plus besoin de flex-direction ici */
   min-height: 100vh;
 }
 
 /* NOUVEAU CONTENEUR PRINCIPAL */
 .app-container {
-  display: flex; /* Aligne la Sidebar et le contenu principal côte à côte */
+  display: flex;
 }
 
-/* On retire le display:flex de l'ancien conteneur */
 .homepage-container {
-  /* display: flex; */ /* <-- SUPPRIMER CETTE LIGNE */
   flex-grow: 1;
 }
 
 .main-content {
-  flex-grow: 1; /* Permet au contenu de prendre toute la place restante */
-  padding: 20px 40px; /* Un peu plus de padding horizontal */
-  max-width: calc(100% - 250px); /* 250px est la largeur de la sidebar */
+  flex-grow: 1;
+  padding: 20px 40px;
+  max-width: calc(100% - 250px);
   overflow-y: auto;
   margin-left: 150px;
+}
+
+/* MEDIA QUERIES POUR LA RESPONSIVITÉ */
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 120px;
+    padding: 15px 20px;
+    max-width: calc(100% - 120px);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 110px;
+    padding: 15px;
+    max-width: calc(100% - 110px);
+  }
+
+  h1 {
+    font-size: 2em !important;
+  }
+
+  h2 {
+    font-size: 1.5em !important;
+  }
+
+  h3 {
+    font-size: 1.2em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    margin-left: 0;
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.5em !important;
+  }
+
+  /* HomePage responsive */
+  .main-content p {
+    font-size: 0.95em !important;
+    text-align: left !important;
+  }
+
+  .main-content h4 {
+    font-size: 1.1em !important;
+  }
+
+  .main-content hr {
+    margin: 20px 0 !important;
+  }
 }

@@ -115,3 +115,127 @@
 .set-column img {
     max-width: none;
 }
+
+/* MEDIA QUERIES POUR LA RESPONSIVITÉ */
+@media (max-width: 992px) {
+    .artefacts-table {
+        border: none;
+    }
+
+    .table-header {
+        display: none;
+    }
+
+    .artefact-row {
+        grid-template-columns: 1fr;
+        border: 1px solid #444;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .set-column {
+        border-right: none;
+        border-bottom: 1px solid #444;
+        padding: 15px;
+    }
+
+    .set-column img {
+        max-width: 120px;
+    }
+
+    .bonuses-column {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .artefacts-page-container {
+        padding: 15px;
+    }
+
+    .artefacts-page-container h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    .set-column h3 {
+        font-size: 1.2em;
+    }
+
+    .bonus-item h4 {
+        font-size: 1em;
+    }
+
+    .bonus-item div {
+        font-size: 0.95em;
+    }
+
+    .set-image-gallery {
+        max-width: 150px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .artefacts-page-container {
+        padding: 10px;
+    }
+
+    .artefacts-page-container h1 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .artefact-row {
+        margin-bottom: 15px;
+    }
+
+    .set-column {
+        padding: 12px;
+    }
+
+    .set-column img {
+        max-width: 100px;
+        margin-bottom: 10px;
+    }
+
+    .set-column h3 {
+        font-size: 1.1em;
+    }
+
+    .set-column span {
+        font-size: 0.9em;
+    }
+
+    .bonuses-column {
+        padding: 12px;
+    }
+
+    .bonus-item {
+        margin-bottom: 15px;
+    }
+
+    .bonus-item h4 {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
+
+    .bonus-item div {
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+
+    .bonus-item ul {
+        padding-left: 15px;
+    }
+
+    .set-image-gallery {
+        max-width: 130px;
+        gap: 6px;
+    }
+
+    .set-piece-image {
+        border-radius: 3px;
+        padding: 3px;
+    }
+}

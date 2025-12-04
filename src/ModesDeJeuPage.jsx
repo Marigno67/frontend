@@ -48,7 +48,9 @@ function ModesDeJeuPage() {
       {modeActif && (
         <div className="mode-details-card">
           <h2>{modeActif.nom}</h2>
-          <p>Détails du mode...</p>
+          {modeActif.description && (
+            <p className="mode-description">{modeActif.description}</p>
+          )}
         </div>
       )}
     </div>

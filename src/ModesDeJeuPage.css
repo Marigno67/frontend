@@ -29,6 +29,91 @@
   background-color: rgba(30, 30, 30, 0.8);
   border: 1px solid #61dafb;
   border-radius: 8px;
-  padding: 20px;
+  padding: 30px;
   box-shadow: 0 0 10px #61dafb;
+}
+
+.mode-details-card h2 {
+  color: #61dafb;
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.mode-description {
+  color: #f0f0f0;
+  font-size: 1.1em;
+  line-height: 1.8;
+  text-align: justify;
+  margin: 0;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #61dafb;
+  border-radius: 4px;
+}
+
+/* MEDIA QUERIES POUR LA RESPONSIVITÉ */
+@media (max-width: 768px) {
+  .modes-dropdown-container {
+    margin-top: 15px;
+  }
+
+  .modes-dropdown-container label {
+    font-size: 1em;
+    margin-right: 10px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .modes-dropdown-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .mode-details-card {
+    margin-top: 30px;
+    padding: 20px;
+  }
+
+  .mode-details-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+
+  .mode-description {
+    font-size: 1em;
+    line-height: 1.6;
+    padding: 12px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .modes-dropdown-container {
+    margin-top: 10px;
+  }
+
+  .modes-dropdown-container label {
+    font-size: 0.9em;
+  }
+
+  .modes-dropdown-container select {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  .mode-details-card {
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .mode-details-card h2 {
+    font-size: 1.3em;
+  }
+
+  .mode-description {
+    font-size: 0.95em;
+    padding: 10px;
+  }
 }
