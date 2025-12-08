@@ -12,6 +12,7 @@ import backgroundImage from './background.jpg';
 import Sidebar from './Sidebar';
 import ArtefactsPage from './ArtefactsPage';
 import OmbresPage from './OmbresPage';
+import ArmesPage from './ArmesPage';
 
 function App() {
   const appStyle = {
@@ -35,6 +36,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/personnages" element={<AllPersonnagesPage />} />
               <Route path="/personnage/:id" element={<PersonnageDetailsPage />} />
+              <Route path="/armes" element={<ArmesPage />} />
               <Route path="/modes-de-jeu" element={<ModesDeJeuPage />} />
               <Route path="/modes-de-jeu/:id" element={<ModeDeJeuDetailsPage />} />
               <Route path="/artefacts" element={<ArtefactsPage />} />

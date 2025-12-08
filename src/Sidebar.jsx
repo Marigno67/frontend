@@ -38,6 +38,12 @@ function Sidebar() {
         </div>
 
         <div className="menu-item">
+          <Link to="/armes" className="sidebar-link" onClick={closeMenu}>
+            Les Armes de Sung
+          </Link>
+        </div>
+
+        <div className="menu-item">
           <Link to="/modes-de-jeu" className="sidebar-link" onClick={closeMenu}>
             Modes de jeu
           </Link>
