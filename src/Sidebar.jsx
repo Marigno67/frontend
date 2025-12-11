@@ -56,6 +56,12 @@ function Sidebar() {
         </div>
 
         <div className="menu-item">
+          <Link to="/noyaux" className="sidebar-link" onClick={closeMenu}>
+            Noyaux
+          </Link>
+        </div>
+
+        <div className="menu-item">
           <Link to="/ombres" className="sidebar-link" onClick={closeMenu}>
             Ombres
           </Link>

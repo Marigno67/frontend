@@ -12,6 +12,8 @@ const PersonnageDetailsPage = () => {
 
     // Nouvel état pour la visibilité des statistiques
     const [statsAffiches, setStatsAffiches] = useState(false);
+    const [noyauxAffiches, setNoyauxAffiches] = useState(false);
+    const [alternativeIndex, setAlternativeIndex] = useState(0);
 
     useEffect(() => {
         const fetchPersonnage = async () => {
@@ -33,6 +35,7 @@ const PersonnageDetailsPage = () => {
             setOngletActif(null);
             setStatsAffiches(false);
             setArtefactsAffiches(false);
+            setNoyauxAffiches(false);
             return;
         }
 
@@ -42,6 +45,7 @@ const PersonnageDetailsPage = () => {
         if (onglet === 'Statistiques') {
             setStatsAffiches(true);
             setArtefactsAffiches(false);
+            setNoyauxAffiches(false);
         }
 
         if (onglet === 'Artefacts') {
@@ -50,6 +54,13 @@ const PersonnageDetailsPage = () => {
                 setArtefactSelectionne(personnage.builds[0]);
             }
             setStatsAffiches(false);
+            setNoyauxAffiches(false);
+        }
+
+        if (onglet === 'Noyaux') {
+            setNoyauxAffiches(true);
+            setStatsAffiches(false);
+            setArtefactsAffiches(false);
         }
     };
 
@@ -85,6 +96,9 @@ const PersonnageDetailsPage = () => {
                 </button>
                 <button onClick={() => handleOngletClick('Artefacts')} className={ongletActif === 'Artefacts' ? 'active' : ''}>
                     Artefacts
+                </button>
+                <button onClick={() => handleOngletClick('Noyaux')} className={ongletActif === 'Noyaux' ? 'active' : ''}>
+                    Noyaux
                 </button>
             </div>
 
@@ -180,6 +194,103 @@ const PersonnageDetailsPage = () => {
                     )}
                 </div>
             )}
+
+            {/* Affichage conditionnel pour les noyaux */}
+            {noyauxAffiches && personnage.personnageNoyaux && personnage.personnageNoyaux.length > 0 && (() => {
+                const noyauxTries = personnage.personnageNoyaux.sort((a, b) => a.priorite - b.priorite);
+                const meilleursChoix = noyauxTries.filter(n => n.priorite === 1);
+
+                // Regrouper les alternatives par niveau de priorité
+                const alternativesParNiveau = {};
+                noyauxTries.filter(n => n.priorite > 1).forEach(noyau => {
+                    if (!alternativesParNiveau[noyau.priorite]) {
+                        alternativesParNiveau[noyau.priorite] = [];
+                    }
+                    alternativesParNiveau[noyau.priorite].push(noyau);
+                });
+
+                const niveauxAlternatifs = Object.keys(alternativesParNiveau).sort((a, b) => a - b);
+
+                const handlePrevAlternative = () => {
+                    setAlternativeIndex((prev) => (prev > 0 ? prev - 1 : niveauxAlternatifs.length - 1));
+                };
+
+                const handleNextAlternative = () => {
+                    setAlternativeIndex((prev) => (prev < niveauxAlternatifs.length - 1 ? prev + 1 : 0));
+                };
+
+                const niveauActuel = niveauxAlternatifs[alternativeIndex];
+                const alternativesAffichees = alternativesParNiveau[niveauActuel] || [];
+
+                return (
+                    <div className="noyaux-container">
+                        <h2>Noyaux recommandés</h2>
+                        <p className="noyaux-description">
+                            Les noyaux sont des éléments qui permettent d'améliorer les statistiques de votre personnage.
+                            Privilégiez les statistiques plutôt que l'élément lors du choix des noyaux.
+                        </p>
+                        <div className="noyaux-layout">
+                            {/* Colonne gauche : TOUS les Meilleurs choix */}
+                            <div className="noyau-meilleur-choix">
+                                <span className="priorite-badge priorite-1">Meilleurs choix</span>
+                                <div className="noyaux-grid">
+                                    {meilleursChoix.map(noyau => (
+                                        <div key={noyau.id} className="noyau-card">
+                                            {noyau.noyau.image && (
+                                                <img
+                                                    src={`${process.env.REACT_APP_API_URL}/uploads/images/noyaux/${noyau.noyau.image}`}
+                                                    alt={noyau.noyau.nom}
+                                                    className="noyau-image-medium"
+                                                />
+                                            )}
+                                            <h4>{noyau.noyau.nom}</h4>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Colonne droite : Alternatives du même niveau avec carousel */}
+                            {niveauxAlternatifs.length > 0 && (
+                                <div className="noyau-alternatives">
+                                    <button
+                                        className="carousel-btn carousel-btn-left"
+                                        onClick={handlePrevAlternative}
+                                        disabled={niveauxAlternatifs.length <= 1}
+                                    >
+                                        ‹
+                                    </button>
+                                    <div className="alternative-content">
+                                        <span className="priorite-badge priorite-2">
+                                            Alternative {niveauActuel - 1}
+                                        </span>
+                                        <div className="noyaux-grid">
+                                            {alternativesAffichees.map(noyau => (
+                                                <div key={noyau.id} className="noyau-card">
+                                                    {noyau.noyau.image && (
+                                                        <img
+                                                            src={`${process.env.REACT_APP_API_URL}/uploads/images/noyaux/${noyau.noyau.image}`}
+                                                            alt={noyau.noyau.nom}
+                                                            className="noyau-image-medium"
+                                                        />
+                                                    )}
+                                                    <h4>{noyau.noyau.nom}</h4>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <button
+                                        className="carousel-btn carousel-btn-right"
+                                        onClick={handleNextAlternative}
+                                        disabled={niveauxAlternatifs.length <= 1}
+                                    >
+                                        ›
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
+            })()}
         </div>
     );
 };

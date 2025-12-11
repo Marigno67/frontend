@@ -1,0 +1,198 @@
+/* Container principal */
+.noyaux-page-container {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.noyaux-page-container h1 {
+    font-size: 3em;
+    color: #61dafb;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Introduction / Conseil */
+.noyaux-introduction {
+    background-color: rgba(97, 218, 251, 0.1);
+    border: 2px solid #61dafb;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(97, 218, 251, 0.3);
+}
+
+.noyaux-conseil {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #f0f0f0;
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Section par ensemble */
+.ensemble-section {
+    margin-bottom: 60px;
+}
+
+.ensemble-titre {
+    font-size: 2.2em;
+    color: #61dafb;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #61dafb;
+}
+
+/* Grille des noyaux */
+.noyaux-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Carte de noyau */
+.noyau-card {
+    background-color: rgba(30, 30, 30, 0.9);
+    border: 2px solid #61dafb;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.noyau-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(97, 218, 251, 0.4);
+}
+
+/* Image du noyau */
+.noyau-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noyau-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Nom du noyau */
+.noyau-nom {
+    font-size: 1.4em;
+    color: #61dafb;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Description du noyau */
+.noyau-description {
+    color: #d0d0d0;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.noyau-description p {
+    margin: 10px 0;
+}
+
+/* Messages d'absence */
+.no-noyaux,
+.no-results {
+    text-align: center;
+    font-size: 1.2em;
+    color: #999;
+    margin: 40px 0;
+}
+
+/* Chargement */
+.loading {
+    font-size: 1.5em;
+    text-align: center;
+    padding: 50px;
+    color: #f0f0f0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .noyaux-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .noyaux-page-container {
+        padding: 15px;
+    }
+
+    .noyaux-page-container h1 {
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+
+    .noyaux-introduction {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .noyaux-conseil {
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+
+    .ensemble-titre {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .noyaux-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .noyau-card {
+        padding: 15px;
+    }
+
+    .noyau-image-container {
+        height: 180px;
+    }
+
+    .noyau-nom {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .noyaux-page-container h1 {
+        font-size: 1.8em;
+    }
+
+    .noyaux-introduction {
+        padding: 15px;
+    }
+
+    .noyaux-conseil {
+        font-size: 1em;
+    }
+
+    .ensemble-titre {
+        font-size: 1.5em;
+    }
+
+    .noyau-image-container {
+        height: 150px;
+    }
+}

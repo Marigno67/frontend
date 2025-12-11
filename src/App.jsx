@@ -13,6 +13,7 @@ import Sidebar from './Sidebar';
 import ArtefactsPage from './ArtefactsPage';
 import OmbresPage from './OmbresPage';
 import ArmesPage from './ArmesPage';
+import NoyauxPage from './NoyauxPage';
 
 function App() {
   const appStyle = {
@@ -40,6 +41,7 @@ function App() {
               <Route path="/modes-de-jeu" element={<ModesDeJeuPage />} />
               <Route path="/modes-de-jeu/:id" element={<ModeDeJeuDetailsPage />} />
               <Route path="/artefacts" element={<ArtefactsPage />} />
+              <Route path="/noyaux" element={<NoyauxPage />} />
               <Route path="/ombres" element={<OmbresPage />} />
             </Routes>
           </main>
