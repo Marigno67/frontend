@@ -57,28 +57,22 @@ function ArtefactsPage() {
     return (
         <div className="artefacts-page-container">
             <h1>Ensembles d'artefacts</h1>
-            <div className="artefacts-table">
-                <div className="table-header">
-                    <div className="set-column-header">Set</div>
-                    <div className="bonuses-column-header">Bonus</div>
-                </div>
-                    {sets.map(set => (
-                    <div key={set.id} className="artefact-row">
-                        <div className="set-column">
-                            <div className="set-image-gallery">
-                                {set.images && set.images.map(image => (
-                                    <img 
-                                        key={image.id}
-                                        src={`${process.env.REACT_APP_API_URL}/uploads/images/${image.path}`} 
-                                        alt={`${set.nom} - pièce d'équipement`} 
-                                        className="set-piece-image"
-                                    />
-                                ))}
-                            </div>
-                            <h3>{set.nom}</h3>
-                            {set.sousTitre && <span>{set.sousTitre}</span>}
+            <div className="artefacts-grid">
+                {sets.map(set => (
+                    <div key={set.id} className="artefact-card">
+                        <div className="set-image-gallery">
+                            {set.images && set.images.map(image => (
+                                <img
+                                    key={image.id}
+                                    src={`${process.env.REACT_APP_API_URL}/uploads/images/${image.path}`}
+                                    alt={`${set.nom} - pièce d'équipement`}
+                                    className="set-piece-image"
+                                />
+                            ))}
                         </div>
-                        <div className="bonuses-column">
+                        <h3>{set.nom}</h3>
+                        {set.sousTitre && <span className="set-subtitle">{set.sousTitre}</span>}
+                        <div className="bonuses-section">
                             {set.bonus
                                 .sort((a, b) => a.nombrePieces - b.nombrePieces)
                                 .map(bonus => (

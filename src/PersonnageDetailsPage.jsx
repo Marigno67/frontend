@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PersonnageDetailsPage.css';
 
 const PersonnageDetailsPage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [personnage, setPersonnage] = useState(null);
     const [ongletActif, setOngletActif] = useState(null);
     const [artefactsAffiches, setArtefactsAffiches] = useState(false);
@@ -62,6 +63,16 @@ const PersonnageDetailsPage = () => {
             setStatsAffiches(false);
             setArtefactsAffiches(false);
         }
+    };
+
+    // Fonction pour naviguer vers la page Noyaux
+    const handleNoyauClick = () => {
+        navigate('/noyaux');
+    };
+
+    // Fonction pour naviguer vers la page Artefacts
+    const handleArtefactClick = () => {
+        navigate('/artefacts');
     };
 
     if (!personnage) {
@@ -149,7 +160,7 @@ const PersonnageDetailsPage = () => {
                                                 <h4>{emplacement}</h4>
                                                 {equipementsDansEmplacement.length > 0 ? (
                                                     equipementsDansEmplacement.map(equipement => (
-                                                        <div key={equipement.id} className="equipement-item">
+                                                        <div key={equipement.id} className="equipement-item" onClick={handleArtefactClick}>
                                                             {equipement.image && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${equipement.image}`} alt={equipement.nom} />}
                                                             <div className="equipement-details">
                                                                 <h5>{equipement.nom}</h5>
@@ -172,7 +183,7 @@ const PersonnageDetailsPage = () => {
                                                 <h4>{emplacement}</h4>
                                                 {equipementsDansEmplacement.length > 0 ? (
                                                     equipementsDansEmplacement.map(equipement => (
-                                                        <div key={equipement.id} className="equipement-item">
+                                                        <div key={equipement.id} className="equipement-item" onClick={handleArtefactClick}>
                                                             {equipement.image && <img src={`${process.env.REACT_APP_API_URL}/uploads/images/${equipement.image}`} alt={equipement.nom} />}
                                                             <div className="equipement-details">
                                                                 <h5>{equipement.nom}</h5>
@@ -235,7 +246,7 @@ const PersonnageDetailsPage = () => {
                                 <span className="priorite-badge priorite-1">Meilleurs choix</span>
                                 <div className="noyaux-grid">
                                     {meilleursChoix.map(noyau => (
-                                        <div key={noyau.id} className="noyau-card">
+                                        <div key={noyau.id} className="noyau-card" onClick={handleNoyauClick}>
                                             {noyau.noyau.image && (
                                                 <img
                                                     src={`${process.env.REACT_APP_API_URL}/uploads/images/noyaux/${noyau.noyau.image}`}
@@ -265,7 +276,7 @@ const PersonnageDetailsPage = () => {
                                         </span>
                                         <div className="noyaux-grid">
                                             {alternativesAffichees.map(noyau => (
-                                                <div key={noyau.id} className="noyau-card">
+                                                <div key={noyau.id} className="noyau-card" onClick={handleNoyauClick}>
                                                     {noyau.noyau.image && (
                                                         <img
                                                             src={`${process.env.REACT_APP_API_URL}/uploads/images/noyaux/${noyau.noyau.image}`}

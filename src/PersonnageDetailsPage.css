@@ -85,6 +85,14 @@
     gap: 15px;
     align-items: center;
     margin-bottom: 10px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.equipement-item:hover {
+    background-color: rgba(97, 218, 251, 0.1);
 }
 
 .equipement-item img {
@@ -104,6 +112,12 @@
     color: #ccc;
 }
 
+
+/* Conteneur des onglets de navigation */
+.onglets-navigation {
+    display: flex;
+    gap: 10px;
+}
 
 /* Style pour le bouton principal "Artefacts" */
 .onglets-navigation button {
@@ -415,7 +429,7 @@
 }
 
 /* Une seule colonne : noyaux empilés verticalement */
-.noyaux-grid {
+.personnage-details-page .noyaux-grid {
     display: flex !important;
     flex-direction: column !important;
     gap: 12px;
@@ -423,7 +437,7 @@
     width: 100%;
 }
 
-.noyau-card {
+.personnage-details-page .noyau-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -433,9 +447,10 @@
     transition: transform 0.2s ease;
     width: 350px;
     margin: 0 auto;
+    cursor: pointer;
 }
 
-.noyau-card:hover {
+.personnage-details-page .noyau-card:hover {
     transform: translateY(-5px);
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -449,7 +464,7 @@
     padding: 5px;
 }
 
-.noyau-card h4 {
+.personnage-details-page .noyau-card h4 {
     font-size: 0.9em;
     color: #61dafb;
     text-align: center;
@@ -637,7 +652,7 @@
         padding: 20px;
     }
 
-    .noyaux-grid {
+    .personnage-details-page .noyaux-grid {
         gap: 15px;
     }
 
@@ -646,7 +661,7 @@
         height: 80px;
     }
 
-    .noyau-card h4 {
+    .personnage-details-page .noyau-card h4 {
         font-size: 0.9em;
     }
 
@@ -692,7 +707,7 @@
         padding: 15px;
     }
 
-    .noyaux-grid {
+    .personnage-details-page .noyaux-grid {
         gap: 10px;
     }
 
@@ -701,11 +716,11 @@
         height: 60px;
     }
 
-    .noyau-card {
+    .personnage-details-page .noyau-card {
         padding: 10px;
     }
 
-    .noyau-card h4 {
+    .personnage-details-page .noyau-card h4 {
         font-size: 0.8em;
     }
 

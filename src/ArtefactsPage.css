@@ -1,76 +1,97 @@
+/* Container principal */
 .artefacts-page-container {
     padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .artefacts-page-container h1 {
-    text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 40px;
-}
-
-.artefacts-table {
-    border: 1px solid #444;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.table-header {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    background-color: #1a1a1a;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 3em;
     color: #61dafb;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.set-column-header,
-.bonuses-column-header {
-    padding: 15px;
-}
-
-.artefact-row {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    border-top: 1px solid #444;
-    align-items: center;
-}
-
-.set-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    margin-bottom: 40px;
     text-align: center;
-    border-right: 1px solid #444;
 }
 
-.set-column img {
-    max-width: 150px;
-    height: auto;
+/* Grille des artefacts */
+.artefacts-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: flex-start;
+}
+
+/* Carte d'artefact */
+.artefact-card {
+    background-color: rgba(30, 30, 30, 0.9);
+    border: 2px solid #61dafb;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.artefact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(97, 218, 251, 0.4);
+}
+
+/* Galerie d'images des pièces */
+.set-image-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+.set-piece-image {
+    width: 100%;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Nom du set */
+.artefact-card h3 {
+    font-size: 1.4em;
+    color: #61dafb;
+    margin: 0 0 8px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Sous-titre */
+.artefact-card .set-subtitle {
+    display: block;
+    color: #aaa;
+    font-style: italic;
+    font-size: 0.95em;
+    text-align: center;
     margin-bottom: 15px;
 }
 
-.set-column h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.4em;
-    color: #fff;
-}
-
-.set-column span {
-    color: #aaa;
-    font-style: italic;
-}
-
-.bonuses-column {
-    padding: 20px;
+/* Section des bonus */
+.bonuses-section {
+    margin-top: 15px;
 }
 
 .bonus-item {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: rgba(97, 218, 251, 0.05);
+    border-left: 3px solid #61dafb;
+    border-radius: 5px;
 }
+
 .bonus-item:last-child {
     margin-bottom: 0;
 }
@@ -78,88 +99,107 @@
 .bonus-item h4 {
     color: #61dafb;
     font-size: 1.1em;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
     font-weight: bold;
 }
 
-/* Style pour le contenu HTML de la description */
+/* Contenu HTML de la description */
 .bonus-item div {
-    color: #ddd;
+    color: #d0d0d0;
     line-height: 1.6;
+    font-size: 0.95em;
 }
 
 .bonus-item ul {
     padding-left: 20px;
-    margin-top: 10px;
+    margin: 8px 0 0 0;
 }
 
-.set-image-gallery {
-    display: grid;
-    /* On affiche les images sur 2 colonnes */
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 10px; /* Espace entre les images */
-    margin-bottom: 15px;
-    max-width: 180px; /* Largeur maximale pour le conteneur de la galerie */
+.bonus-item li {
+    margin-bottom: 5px;
 }
 
-.set-piece-image {
-    width: 100%; /* L'image prend toute la largeur de sa cellule de grille */
-    height: auto;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 5px;
-    box-sizing: border-box; /* Assure que le padding ne s'ajoute pas à la largeur */
+/* Messages d'absence */
+.no-sets,
+.loading {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 50px;
+    color: #f0f0f0;
 }
 
-/* On supprime la taille max de l'ancien 'set-column img' pour éviter les conflits */
-.set-column img {
-    max-width: none;
+/* Responsive */
+@media (max-width: 1200px) {
+    .artefacts-grid {
+        gap: 20px;
+    }
+
+    .artefact-card {
+        width: 320px;
+    }
 }
 
-/* MEDIA QUERIES POUR LA RESPONSIVITÉ */
 @media (max-width: 992px) {
-    .artefacts-table {
-        border: none;
-    }
-
-    .table-header {
-        display: none;
-    }
-
-    .artefact-row {
-        grid-template-columns: 1fr;
-        border: 1px solid #444;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-
-    .set-column {
-        border-right: none;
-        border-bottom: 1px solid #444;
-        padding: 15px;
-    }
-
-    .set-column img {
-        max-width: 120px;
-    }
-
-    .bonuses-column {
-        padding: 15px;
-    }
-}
-
-@media (max-width: 768px) {
     .artefacts-page-container {
         padding: 15px;
     }
 
     .artefacts-page-container h1 {
-        font-size: 2em;
+        font-size: 2.5em;
         margin-bottom: 30px;
     }
 
-    .set-column h3 {
+    .artefacts-grid {
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .artefact-card {
+        width: 300px;
+    }
+
+    .set-image-gallery {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+    }
+
+    .set-piece-image {
+        height: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .artefacts-page-container h1 {
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+
+    .artefacts-grid {
+        gap: 15px;
+    }
+
+    .artefact-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+    }
+
+    .artefact-card h3 {
         font-size: 1.2em;
+    }
+
+    .set-image-gallery {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+        padding: 8px;
+    }
+
+    .set-piece-image {
+        height: 45px;
+    }
+
+    .bonus-item {
+        padding: 10px;
     }
 
     .bonus-item h4 {
@@ -167,12 +207,7 @@
     }
 
     .bonus-item div {
-        font-size: 0.95em;
-    }
-
-    .set-image-gallery {
-        max-width: 150px;
-        gap: 8px;
+        font-size: 0.9em;
     }
 }
 
@@ -182,60 +217,52 @@
     }
 
     .artefacts-page-container h1 {
-        font-size: 1.5em;
+        font-size: 1.8em;
         margin-bottom: 20px;
     }
 
-    .artefact-row {
-        margin-bottom: 15px;
+    .artefacts-grid {
+        gap: 12px;
     }
 
-    .set-column {
+    .artefact-card {
         padding: 12px;
     }
 
-    .set-column img {
-        max-width: 100px;
-        margin-bottom: 10px;
-    }
-
-    .set-column h3 {
+    .artefact-card h3 {
         font-size: 1.1em;
     }
 
-    .set-column span {
-        font-size: 0.9em;
+    .artefact-card .set-subtitle {
+        font-size: 0.85em;
     }
 
-    .bonuses-column {
-        padding: 12px;
+    .set-image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        padding: 6px;
+    }
+
+    .set-piece-image {
+        height: 50px;
     }
 
     .bonus-item {
-        margin-bottom: 15px;
+        padding: 8px;
+        margin-bottom: 12px;
     }
 
     .bonus-item h4 {
         font-size: 0.95em;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 
     .bonus-item div {
-        font-size: 0.9em;
+        font-size: 0.85em;
         line-height: 1.5;
     }
 
     .bonus-item ul {
         padding-left: 15px;
-    }
-
-    .set-image-gallery {
-        max-width: 130px;
-        gap: 6px;
-    }
-
-    .set-piece-image {
-        border-radius: 3px;
-        padding: 3px;
     }
 }
